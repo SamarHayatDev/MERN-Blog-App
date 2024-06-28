@@ -37,13 +37,26 @@ const page = ({ params }) => {
             {data.title}
           </h1>
           <Image
-            className=" mx-auto"
+            className=" mx-auto mt-6 border border-white rounded-full "
             src={data.author_img}
             width={60}
             height={60}
             alt={data.author_img}
           />
+          <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto ">
+            {data.author}
+          </p>
         </div>
+      </div>
+      <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
+        <Image
+          className=" border-4 border-white "
+          src={data.image}
+          alt={data.image}
+          width={1280}
+          height={720}
+        />
+        <h1>Introduction</h1>
       </div>
     </>
   ) : (

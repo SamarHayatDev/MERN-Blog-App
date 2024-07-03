@@ -39,10 +39,10 @@ const page = ({ params }) => {
           </h1>
           <Image
             className=" mx-auto mt-6 border border-white rounded-full "
-            src={data.author_img}
+            src={data.authorImg}
             width={60}
             height={60}
-            alt={data.author_img}
+            alt={data.authorImg}
           />
           <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto ">
             {data.author}

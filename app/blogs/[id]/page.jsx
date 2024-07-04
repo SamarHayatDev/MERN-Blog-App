@@ -57,49 +57,12 @@ const page = ({ params }) => {
           width={1280}
           height={720}
         />
-        <h1 className="my-8 text-[26px] font-semibold">Introduction</h1>
-        <p>{data.description}</p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero ut
-          quisquam blanditiis aperiam, accusantium fugit!
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">Concolutions</h3>
 
-        <p className="my-3">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic neque
-          obcaecati ea voluptates dicta ex a. Rerum tempore quaerat facere
-          perspiciatis dicta odit, ipsum laborum totam nemo praesentium, placeat
-          officiis.
-        </p>
+        <div
+          dangerouslySetInnerHTML={{ __html: data.description }}
+          className="blog-content"
+        ></div>
+
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share this article on Social Media

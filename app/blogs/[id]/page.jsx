@@ -1,10 +1,11 @@
 "use client";
+
+import { useState, useEffect } from "react";
 import { assets, blog_data } from "@/assets/assets";
 import axios from "axios";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 const Page = ({ params }) => {
   const [data, setData] = useState(null);
   const fetchBlogData = async () => {

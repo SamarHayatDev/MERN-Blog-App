@@ -97,26 +97,32 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const timestamp = Date.now();
+    console.log("Received formData:", formData);
 
+    const timestamp = Date.now();
     const image = formData.get("image");
     const imageByteData = await image.arrayBuffer();
     const buffer = Buffer.from(imageByteData);
     const path = `./public/${timestamp}_${image.name}`;
-    await writeFile(path, buffer);
-    const imgUrl = `/${timestamp}_${image.name}`;
 
+    console.log("Writing file to path:", path);
+    await writeFile(path, buffer);
+
+    const imgUrl = `/${timestamp}_${image.name}`;
     const blogData = {
-      title: `${formData.get("title")}`,
-      description: `${formData.get("description")}`,
-      category: `${formData.get("category")}`,
-      author: `${formData.get("author")}`,
-      image: `${imgUrl}`,
-      authorImg: `${formData.get("authorImg")}`,
+      title: formData.get("title"),
+      description: formData.get("description"),
+      category: formData.get("category"),
+      author: formData.get("author"),
+      image: imgUrl,
+      authorImg: formData.get("authorImg"),
     };
+
+    console.log("Creating blog with data:", blogData);
     await BlogModel.create(blogData);
-    console.log("blog saved");
-    return NextResponse.json({ success: true, msg: "blog added" });
+    console.log("Blog saved successfully");
+
+    return NextResponse.json({ success: true, msg: "Blog added" });
   } catch (error) {
     console.error("Error uploading blog:", error);
     return NextResponse.json(
@@ -126,13 +132,26 @@ export async function POST(request) {
   }
 }
 
-// Creating API endpoint to del blog
+// Creating API endpoint to delete blog
 export async function DELETE(request) {
   try {
-    const id = await request.nextUrl.searchParams.get("id");
+    const id = request.nextUrl.searchParams.get("id");
+    console.log("Deleting blog with id:", id);
+
     const blog = await BlogModel.findById(id);
-    fs.unlink(`./public${blog.image}`, () => {});
+    if (!blog) {
+      console.error("Blog not found:", id);
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
+
+    console.log("Deleting file:", `./public${blog.image}`);
+    fs.unlink(`./public${blog.image}`, (err) => {
+      if (err) console.error("Error deleting file:", err);
+    });
+
     await BlogModel.findByIdAndDelete(id);
+    console.log("Blog deleted successfully");
+
     return NextResponse.json({ msg: "Blog Deleted" });
   } catch (error) {
     console.error("Error deleting blog:", error);
